@@ -34,7 +34,7 @@ export function EmptyState() {
 
         <div className="flex flex-col sm:flex-row gap-3 pt-4">
           <Button
-            className="border-orange-500 text-white bg-orange-600 hover:bg-orange-600 hover:text-white font-mono"
+            className="border-orange-500 text-white bg-orange-600 hover:bg-orange-700 hover:text-white font-mono"
             onClick={() => navigate("/add")}
           >
             Submit Your Token

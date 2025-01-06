@@ -21,7 +21,7 @@ export function SiteHeader() {
           <Button
             variant="outline"
             size="sm"
-            className="border-orange-500 text-white bg-orange-600 hover:bg-orange-600 hover:text-white font-mono"
+            className="border-orange-500 text-white bg-orange-600 hover:bg-orange-700 hover:text-white font-mono"
             onClick={handleNavigate}
           >
             Submit Your Token

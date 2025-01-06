@@ -1,4 +1,5 @@
 import { SiteHeader } from "@/components/Header";
+import { SiteFooter } from "@/components/SiteFooter";
 import { Toaster } from "@/components/ui/toaster";
 
 export default function Layout({ children }) {
@@ -7,6 +8,7 @@ export default function Layout({ children }) {
       <SiteHeader />
       <main className="container py-6">{children}</main>
       <Toaster />
+      <SiteFooter />
     </div>
   );
 }
