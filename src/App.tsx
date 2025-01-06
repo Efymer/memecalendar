@@ -7,10 +7,7 @@ import TokenPage from "./screens/TokenPage";
 import SubmissionSuccess from "./screens/SubmissionSuccess";
 import ScrollToTop from "./components/ScrollToTop";
 import NotFound from "./screens/NotFound";
-import { Analytics } from "@vercel/analytics/react"
-
-export const GRAPHQL_ENDPOINT_URL =
-  "https://possible-midge-98.hasura.app/v1/graphql";
+import { Analytics } from "@vercel/analytics/react";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,7 +24,10 @@ const App: React.FC = () => {
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/submit-token/success" element={<SubmissionSuccess />} />
+            <Route
+              path="/submit-token/success"
+              element={<SubmissionSuccess />}
+            />
             <Route path="/submit-token" element={<SubmitForm />} />
             <Route path="/token/:id" element={<TokenPage />} />
             <Route path="*" element={<NotFound />} />

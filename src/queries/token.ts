@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
 import request, { gql } from "graphql-request";
-import { GRAPHQL_ENDPOINT_URL } from "@/App";
 import { Token } from "@/mutations/token";
 import { format } from "date-fns";
 
@@ -17,7 +16,7 @@ export function useGetTodayTokens() {
 
   return useQuery(["tokens", "today"], async () => {
     const data: Tokens = await request(
-      GRAPHQL_ENDPOINT_URL,
+      import.meta.env.VITE_GRAPHQL_ENDPOINT_URL,
       gql`
       query GetTokenLaunch {
         token_launch(order_by: { created_at: desc }, where: { date: {_eq: "${today}" } }) {
@@ -47,7 +46,7 @@ export function useGetUpcomingTokens() {
 
   return useQuery(["tokens", "upcoming"], async () => {
     const data: Tokens = await request(
-      GRAPHQL_ENDPOINT_URL,
+      import.meta.env.VITE_GRAPHQL_ENDPOINT_URL,
       gql`
       query GetTokenLaunch {
         token_launch(order_by: { date: asc }, where: { date: {_gt: "${today}" } }) {
@@ -78,7 +77,7 @@ export function useGetOngoingTokens() {
 
   return useQuery(["tokens", "ongoing"], async () => {
     const data: Tokens = await request(
-      GRAPHQL_ENDPOINT_URL,
+      import.meta.env.VITE_GRAPHQL_ENDPOINT_URL,
       gql`
       query GetTokenLaunch {
         token_launch(order_by: { date: desc }, where: { date: {_lt: "${today}" } }) {
@@ -109,7 +108,7 @@ export function useGetTokenById(tokenId: string) {
     ["tokens", tokenId],
     async () => {
       const data: TokenById = await request(
-        GRAPHQL_ENDPOINT_URL,
+        import.meta.env.VITE_GRAPHQL_ENDPOINT_URL,
         gql`
           query ($token_id: uuid!) {
             token_launch_by_pk(id: $token_id) {
