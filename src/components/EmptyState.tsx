@@ -22,20 +22,20 @@ export function EmptyState() {
 
         <div className="space-y-2 max-w-sm">
           <h3 className="text-lg font-semibold text-white font-mono">
-            No Drops Found
+            No Tokens Found
           </h3>
           <p className="text-sm text-white/70 font-mono">
-            {">"} searching for drops...
+            {">"} searching for tokens...
           </p>
           <p className="text-sm text-white/70 font-mono">
-            {">"} error: no drops found in the current directory
+            {">"} error: no tokens found in the current directory
           </p>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 pt-4">
           <Button
             className="border-orange-500 text-white bg-orange-600 hover:bg-orange-700 hover:text-white font-mono"
-            onClick={() => navigate("/add")}
+            onClick={() => navigate("/submit-token")}
           >
             Submit Your Token
           </Button>

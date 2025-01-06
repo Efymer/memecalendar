@@ -61,7 +61,7 @@ export function useCreateToken() {
       retry: 10,
       onSuccess: (data: { id: string }) => {
         queryClient.invalidateQueries(["tokens"]);
-        navigate("/add/success", { state: { id: data.id } });
+        navigate("/submit-token/success", { state: { id: data.id } });
       },
       onError: () => {
         toast({

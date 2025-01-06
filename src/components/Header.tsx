@@ -5,7 +5,7 @@ import { HashConnectButton } from "./HashConnectButton";
 export function SiteHeader() {
   const navigate = useNavigate();
 
-  const handleNavigate = () => navigate("/add");
+  const handleNavigate = () => navigate("/submit-token");
 
   return (
     <header className="w-full border-b border-[#1a2333] bg-[#0A0D14]">

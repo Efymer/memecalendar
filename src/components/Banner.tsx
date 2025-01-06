@@ -20,7 +20,7 @@ export default function Banner() {
             <Button
               variant="secondary"
               size="lg"
-              onClick={() => navigate("/add")}
+              onClick={() => navigate("/submit-token")}
             >
               Submit Your Token
             </Button>

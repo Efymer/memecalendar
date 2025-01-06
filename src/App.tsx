@@ -27,8 +27,8 @@ const App: React.FC = () => {
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/add/success" element={<SubmissionSuccess />} />
-            <Route path="/add" element={<SubmitForm />} />
+            <Route path="/submit-token/success" element={<SubmissionSuccess />} />
+            <Route path="/submit-token" element={<SubmitForm />} />
             <Route path="/token/:id" element={<TokenPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
