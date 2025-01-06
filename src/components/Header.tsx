@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { HashConnectButton } from "./HashConnectButton";
+import { HashpackConnector } from "@buidlerlabs/hashgraph-react-wallets/connectors";
 
 export function SiteHeader() {
   const navigate = useNavigate();
+  const { isConnected, disconnect } = useWallet(HashpackConnector);
 
   const handleNavigate = () => navigate("/submit-token");
 
@@ -26,7 +28,7 @@ export function SiteHeader() {
           >
             Submit Your Token
           </Button>
-          {/* <HashConnectButton /> */}
+          {isConnected && <HashConnectButton />}
         </div>
       </div>
     </header>
