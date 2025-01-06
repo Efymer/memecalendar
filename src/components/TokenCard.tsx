@@ -77,7 +77,7 @@ export function TokenCard({
             {/* <Badge
               variant="secondary"
               className={cn(
-                "absolute bottom-1 right-1 text-xs border-0 font-mono",
+                "absolute bottom-1 right-1 text-sm border-0 font-mono",
                 // statusColors[status]
                 statusColors["today"]
               )}
@@ -87,8 +87,8 @@ export function TokenCard({
             </Badge> */}
           </div>
           <div className="flex-1 space-y-2">
-            <div className="flex items-center gap-1 text-white">
-              <h1 className="font-semibold text-xl">
+            <div className="flex items-center gap-1">
+              <h1 className="text-lg font-semibold text-white font-mono">
                 <Link to={"/token/" + id}>
                   {name} ({symbol})
                 </Link>
@@ -101,27 +101,27 @@ export function TokenCard({
 
               <div className="flex items-center gap-1 text-white/70">
                 <Calendar className="h-3 w-3" />
-                <span className="text-xs font-mono">{format(date, "PPP")}</span>
+                <span className="text-sm text-white/70 font-mono">{format(date, "PPP")}</span>
               </div>
             </div>
             {/* {price && (
               <div className="flex items-center gap-1 text-white/70">
                 <Wallet className="h-3 w-3" />
-                <span className="text-xs font-mono">{price}</span>
+                <span className="text-sm font-mono">{price}</span>
               </div>
             )} */}
             {/* {followers && (
               <div className="flex items-center gap-1 text-white/70">
                 <Users className="h-3 w-3" />
-                <span className="text-xs font-mono">
+                <span className="text-sm font-mono">
                   {followers.toLocaleString()} followers
                 </span>
               </div>
             )} */}
 
             {dev_wallet && (
-              <div className="flex items-center gap-1 text-white/70">
-                <span className="inline-flex items-center gap-1 text-xs transition-colors font-mono">
+              <div className="flex items-center gap-1 text-sm text-white/70 font-mono">
+                <span className="inline-flex items-center gap-1 text-sm transition-colors font-mono">
                   <Wallet className="h-3 w-3" />
                   <span>Creator: {dev_wallet}</span>
                 </span>
@@ -139,7 +139,7 @@ export function TokenCard({
             <Badge
               key={tag}
               variant="outline"
-              className="border-[#2a3343] text-white/70 font-mono text-xs"
+              className="border-[#2a3343] text-white/70 font-mono text-sm"
             >
               {tag}
             </Badge>
@@ -152,7 +152,7 @@ export function TokenCard({
               to={twitter}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs text-white/70 hover:text-white transition-colors font-mono"
+              className="inline-flex items-center gap-1 text-sm text-white/70 hover:text-white transition-colors font-mono"
             >
               <Twitter className="h-3 w-3" />
               <span>Twitter</span>
@@ -164,7 +164,7 @@ export function TokenCard({
               to={discord}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs text-white/70 hover:text-white transition-colors font-mono"
+              className="inline-flex items-center gap-1 text-sm text-white/70 hover:text-white transition-colors font-mono"
             >
               <MessageCircle className="h-3 w-3" />
               <span>Discord</span>
@@ -176,7 +176,7 @@ export function TokenCard({
               to={website}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs text-white/70 hover:text-white transition-colors font-mono"
+              className="inline-flex items-center gap-1 text-sm text-white/70 hover:text-white transition-colors font-mono"
             >
               <Send className="h-3 w-3" />
               <span>Telegram</span>
@@ -188,7 +188,7 @@ export function TokenCard({
               to={website}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs text-white/70 hover:text-white transition-colors font-mono"
+              className="inline-flex items-center gap-1 text-sm text-white/70 hover:text-white transition-colors font-mono"
             >
               <Globe className="h-3 w-3" />
               <span>Website</span>
