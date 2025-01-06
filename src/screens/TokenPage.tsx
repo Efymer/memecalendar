@@ -17,9 +17,7 @@ import GoBack from "@/components/GoBack";
 
 export default function TokenPage() {
   const { id } = useParams<{ id: string }>();
-  const { data, isLoading } = useGetTokenById(id);
-
-  if (isLoading) return null;
+  const { data } = useGetTokenById(id);
 
   return (
     <Layout>
@@ -36,13 +34,6 @@ export default function TokenPage() {
               </div>
               <span className="text-white/50 text-sm">token_details.exe</span>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-white/50 hover:text-white"
-            >
-              <Share2 className="h-4 w-4" />
-            </Button>
           </div>
 
           <div className="p-6 space-y-6">
@@ -50,8 +41,8 @@ export default function TokenPage() {
               <div className="space-y-4">
                 <div className="relative aspect-square w-full overflow-hidden rounded-lg border border-[#1a2333]">
                   <img
-                    src={data.cover_image}
-                    alt={data.name}
+                    src={data?.cover_image}
+                    alt={data?.name}
                     className="object-cover"
                     style={{
                       objectFit: "cover",
@@ -65,9 +56,9 @@ export default function TokenPage() {
                 <div className="flex flex-col gap-2">
                   <AddToCalendar
                     event={{
-                      name: data.name,
-                      description: data.description,
-                      date: data.date,
+                      name: data?.name,
+                      description: data?.description,
+                      date: data?.date,
                     }}
                   />
                 </div>
@@ -77,59 +68,59 @@ export default function TokenPage() {
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
                     <h1 className="text-2xl font-bold">
-                      {data.name} ({data.symbol})
+                      {data?.name} ({data?.symbol})
                     </h1>
                   </div>
 
                   <div className="flex flex-wrap gap-4 text-sm text-white/70">
                     <div className="flex items-center gap-1">
                       <Calendar className="h-4 w-4" />
-                      <span>{format(data.date, "PPP")}</span>
+                      <span>{data?.date && format(data?.date, "PPP")}</span>
                     </div>
                   </div>
 
-                  <div className="flex gap-3">
-                    {data.twitter && (
+                  <div className="flex gap-3 text-sm">
+                    {data?.twitter && (
                       <Link
-                        to={data.twitter}
+                        to={data?.twitter}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-white/50 hover:text-white transition-colors"
+                        className="inline-flex items-center gap-1 text-white/70 hover:text-white transition-colors"
                       >
                         <Twitter className="h-4 w-4" />
                         <span>Twitter</span>
                       </Link>
                     )}
-                    {data.discord && (
+                    {data?.discord && (
                       <Link
-                        to={data.discord}
+                        to={data?.discord}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-white/50 hover:text-white transition-colors"
+                        className="inline-flex items-center gap-1 text-white/70 hover:text-white transition-colors"
                       >
                         <MessageCircle className="h-4 w-4" />
                         <span>Discord</span>
                       </Link>
                     )}
-                    {data.website && (
+                    {data?.telegram && (
                       <Link
-                        to={data.website}
+                        to={data?.telegram}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-white/50 hover:text-white transition-colors"
+                        className="inline-flex items-center gap-1 text-white/70 hover:text-white transition-colors"
                       >
-                        <Globe className="h-4 w-4" />
+                        <Send className="h-4 w-4" />
                         <span>Website</span>
                       </Link>
                     )}
-                    {data.telegram && (
+                    {data?.website && (
                       <Link
-                        to={data.telegram}
+                        to={data?.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-white/50 hover:text-white transition-colors"
+                        className="inline-flex items-center gap-1 text-white/70 hover:text-white transition-colors"
                       >
-                        <Send className="h-4 w-4" />
+                        <Globe className="h-4 w-4" />
                         <span>Website</span>
                       </Link>
                     )}
@@ -137,7 +128,7 @@ export default function TokenPage() {
                 </div>
 
                 <div className="whitespace-pre-wrap text-white/70">
-                  {data.description}
+                  {data?.description}
                 </div>
               </div>
             </div>

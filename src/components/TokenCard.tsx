@@ -29,8 +29,8 @@ export function TokenCard({
   const navigate = useNavigate();
 
   const truncatedDescription =
-    description.length > 120
-      ? `${description.substring(0, 120).trim()}...`
+    description.length > 400
+      ? `${description.substring(0, 400).trim()}...`
       : description;
 
   // const statusColors = {

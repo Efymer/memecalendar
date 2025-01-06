@@ -21,18 +21,19 @@ export function useGetTodayTokens() {
       gql`
       query GetTokenLaunch {
         token_launch(order_by: { created_at: desc }, where: { date: {_eq: "${today}" } }) {
-        id
-        name
-        symbol
-        description
-        created_at
-        updated_at
-        cover_image
-        date
-        dev_wallet
-        twitter
-        discord
-        created_by
+          id
+          name
+          symbol
+          description
+          created_at
+          updated_at
+          cover_image
+          date
+          dev_wallet
+          twitter
+          discord
+          website
+          telegram
         }
       }
       `
@@ -50,18 +51,19 @@ export function useGetUpcomingTokens() {
       gql`
       query GetTokenLaunch {
         token_launch(order_by: { date: asc }, where: { date: {_gt: "${today}" } }) {
-        id
-        name
-        symbol
-        description
-        created_at
-        updated_at
-        cover_image
-        date
-        dev_wallet
-        twitter
-        discord
-        created_by
+          id
+          name
+          symbol
+          description
+          created_at
+          updated_at
+          cover_image
+          date
+          dev_wallet
+          twitter
+          discord
+          website
+          telegram
         }
       }
       `
@@ -70,7 +72,6 @@ export function useGetUpcomingTokens() {
     return data?.token_launch;
   });
 }
-
 
 export function useGetOngoingTokens() {
   const today = format(new Date(), "yyyy-MM-dd");
@@ -81,18 +82,19 @@ export function useGetOngoingTokens() {
       gql`
       query GetTokenLaunch {
         token_launch(order_by: { date: desc }, where: { date: {_lt: "${today}" } }) {
-        id
-        name
-        symbol
-        description
-        created_at
-        updated_at
-        cover_image
-        date
-        dev_wallet
-        twitter
-        discord
-        created_by
+          id
+          name
+          symbol
+          description
+          created_at
+          updated_at
+          cover_image
+          date
+          dev_wallet
+          twitter
+          discord
+          website
+          telegram
         }
       }
       `
@@ -101,7 +103,6 @@ export function useGetOngoingTokens() {
     return data?.token_launch;
   });
 }
-
 
 export function useGetTokenById(tokenId: string) {
   return useQuery(
@@ -123,7 +124,8 @@ export function useGetTokenById(tokenId: string) {
               dev_wallet
               twitter
               discord
-              created_by
+              website
+              telegram
             }
           }
         `,

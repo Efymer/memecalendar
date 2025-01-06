@@ -372,7 +372,7 @@ export function SubmitForm() {
                             >
                               <Input
                                 type="file"
-                                accept="image/png,image/jpeg,image/gif"
+                                accept="image/png,image/jpeg,image/gif,image/webp"
                                 className="absolute h-full w-full opacity-0 cursor-pointer"
                                 onChange={handleChange}
                               />
