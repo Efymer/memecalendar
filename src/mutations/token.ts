@@ -29,7 +29,7 @@ export function useCreateToken() {
   return useMutation(
     async (token: Token) => {
       const response = await axios.post(
-        `http://localhost:3000/verify-transaction`,
+        `${import.meta.env.VITE_BACKEND_URL}/verify-transaction`,
         {
           consensusTimestamp: token.conensusTimestamp,
           content: {
