@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Terminal, RefreshCw, Home, ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Terminal } from "lucide-react";
 import { SiteHeader } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 
