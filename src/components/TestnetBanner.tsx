@@ -3,7 +3,7 @@ export function TestnetBanner() {
     <div className="w-full bg-yellow-800 border-b border-yellow-500/20">
       <div className="container py-2">
         <p className="text-xs text-white font-mono text-center">
-          Running on testnet
+          🛠 Running on testnet
         </p>
       </div>
     </div>
