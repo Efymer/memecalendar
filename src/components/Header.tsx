@@ -26,13 +26,7 @@ export function SiteHeader() {
           >
             Submit Your Token
           </Button>
-          {/* <Button
-            size="sm"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-mono"
-          >
-            Connect
-          </Button> */}
-          <HashConnectButton />
+          {/* <HashConnectButton /> */}
         </div>
       </div>
     </header>

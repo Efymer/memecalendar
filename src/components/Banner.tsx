@@ -17,7 +17,11 @@ export default function Banner() {
             memejob.fun token launches.
           </p>
           <div className="flex gap-4">
-            <Button variant="secondary" size="lg" onClick={() => navigate("/add")}>
+            <Button
+              variant="secondary"
+              size="lg"
+              onClick={() => navigate("/add")}
+            >
               Submit Your Token
             </Button>
           </div>

@@ -4,18 +4,31 @@ import {
   useGetTodayTokens,
   useGetUpcomingTokens,
 } from "@/queries/token";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TokenCard } from "@/components/TokenCard";
 import { DropsHeader } from "@/components/DropsHeader";
 import { DropStatus } from "@/types/drop";
 import Banner from "@/components/Banner";
+import { EmptyState } from "@/components/EmptyState";
+import { LoadingState } from "@/components/LoadingState";
 
 export default function Home() {
-  const { data: todayTokens } = useGetTodayTokens();
-  const { data: upComingTokens } = useGetUpcomingTokens();
-  const { data: onGoingTokens } = useGetOngoingTokens();
+  const { data: todayTokens, isLoading: isLoadingToday } = useGetTodayTokens();
+  const { data: upComingTokens, isLoading: isLoadingUpcoming } =
+    useGetUpcomingTokens();
+  const { data: onGoingTokens, isLoading: isLoadingOnGoing } =
+    useGetOngoingTokens();
 
-  const [activeStatus, setActiveStatus] = useState<DropStatus>("today");
+  const isLoading = isLoadingToday || isLoadingUpcoming || isLoadingOnGoing;
+
+  const [activeStatus, setActiveStatus] = useState<DropStatus>("upcoming");
+
+  useEffect(() => {
+    if (todayTokens?.length) {
+      console.log(todayTokens);
+      setActiveStatus("today");
+    }
+  }, [todayTokens]);
 
   return (
     <Layout>
@@ -77,46 +90,62 @@ export default function Home() {
             </Select>
           </div> */}
 
-          <DropsHeader
-            activeStatus={activeStatus}
-            onStatusChange={setActiveStatus}
-            counts={{
-              today: todayTokens?.length,
-              upcoming: upComingTokens?.length,
-              ongoing: onGoingTokens?.length,
-            }}
-          />
+          {isLoading && <LoadingState />}
 
-          <div className="flex gap-6">
-            <div className="flex-1 space-y-4">
-              {activeStatus === "today" && (
-                <>
-                  {todayTokens?.map((drop, i) => (
-                    <TokenCard key={i} {...drop} />
-                  ))}
-                </>
-              )}
+          {!isLoading && (
+            <>
+              <DropsHeader
+                activeStatus={activeStatus}
+                onStatusChange={setActiveStatus}
+                counts={{
+                  today: todayTokens?.length,
+                  upcoming: upComingTokens?.length,
+                  ongoing: onGoingTokens?.length,
+                }}
+              />
 
-              {activeStatus === "upcoming" && (
-                <>
-                  {upComingTokens?.map((drop, i) => (
-                    <TokenCard key={i} {...drop} />
-                  ))}
-                </>
-              )}
+              <div className="flex gap-6">
+                <div className="flex-1 space-y-4">
+                  {activeStatus === "today" && (
+                    <>
+                      {todayTokens?.length ? (
+                        todayTokens.map((drop, i) => (
+                          <TokenCard key={i} {...drop} />
+                        ))
+                      ) : (
+                        <EmptyState />
+                      )}
+                    </>
+                  )}
 
-              {activeStatus === "ongoing" && (
-                <>
-                  {onGoingTokens?.map((drop, i) => (
-                    <TokenCard key={i} {...drop} />
-                  ))}
-                </>
-              )}
+                  {activeStatus === "upcoming" && (
+                    <>
+                      {upComingTokens?.length ? (
+                        upComingTokens.map((drop, i) => (
+                          <TokenCard key={i} {...drop} />
+                        ))
+                      ) : (
+                        <EmptyState />
+                      )}
+                    </>
+                  )}
 
-              {/* {data?.map((drop, i) => (
+                  {activeStatus === "ongoing" && (
+                    <>
+                      {onGoingTokens?.length ? (
+                        onGoingTokens.map((drop, i) => (
+                          <TokenCard key={i} {...drop} />
+                        ))
+                      ) : (
+                        <EmptyState />
+                      )}
+                    </>
+                  )}
+
+                  {/* {data?.map((drop, i) => (
                 <TokenCard key={i} {...drop} />
               ))} */}
-              {/* <div className="flex justify-center">
+                  {/* <div className="flex justify-center">
                 <Button
                   variant="outline"
                   size="lg"
@@ -125,8 +154,10 @@ export default function Home() {
                   Load More
                 </Button>
               </div> */}
-            </div>
-          </div>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </Layout>

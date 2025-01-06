@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { format, startOfDay } from "date-fns";
-
 import { getHbarAmountFromDollars, cn, pinata } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -35,12 +34,6 @@ import GoBack from "@/components/GoBack";
 import { Signer } from "node_modules/@hashgraph/sdk/lib/Signer";
 
 const MAX_FILE_SIZE = 2000000;
-const ACCEPTED_IMAGE_TYPES = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-  "image/webp",
-];
 
 const formSchema = z.object({
   name: z
@@ -226,7 +219,9 @@ export function SubmitForm() {
 
       const signedTx = await transaction.signWithSigner(signer as Signer);
       const txResponse = await signedTx.executeWithSigner(signer as Signer);
-      const transferTxReceipt = await txResponse.getReceiptWithSigner(signer as Signer);
+      const transferTxReceipt = await txResponse.getReceiptWithSigner(
+        signer as Signer
+      );
       // const transferTxRecord = await txResponse.getRecordWithSigner(signer as Signer);
       const transactionStatus = transferTxReceipt.status;
 
@@ -235,7 +230,10 @@ export function SubmitForm() {
       console.log("Transaction status:", transferTxReceipt);
 
       if (transactionStatus.toString() === "SUCCESS") {
-        createToken.mutate({ ...values, conensusTimestamp: txResponse.transactionId.toString() });
+        createToken.mutate({
+          ...values,
+          conensusTimestamp: txResponse.transactionId.toString(),
+        });
         // pass to zustand
         setIsCreating(false);
       }
