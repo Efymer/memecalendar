@@ -64,7 +64,7 @@ const formSchema = z.object({
   date: z.date({
     message: "A start date is required.",
   }),
-  cover_image: z.string({ message: "Image is required." }),
+  cover_image: z.string().min(1, { message: "Image is required." }),
   dev_wallet: z
     .string()
     .regex(/^(0|(?:[1-9]\d*))\.(0|(?:[1-9]\d*))\.(0|(?:[1-9]\d*))$/)
