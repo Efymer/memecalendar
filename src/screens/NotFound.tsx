@@ -27,7 +27,7 @@ export default function NotFound() {
 
   return (
     <div>
-      <div className="min-h-screen bg-[#0A0D14] text-white font-mono">
+      <div className="bg-[#0A0D14] text-white font-mono">
         <SiteHeader />
         <main className="container max-w-2xl py-6">
           <div className="border border-[#1a2333] rounded-lg overflow-hidden">

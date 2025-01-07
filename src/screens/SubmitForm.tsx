@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { CalendarIcon, Loader, Upload } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
 import Layout from "./Layout";
-import { useCreateToken } from "@/mutations/token";
+import { uploadFile, useCreateToken } from "@/mutations/token";
 import { HashpackConnector } from "@buidlerlabs/hashgraph-react-wallets/connectors";
 import { useWallet } from "@buidlerlabs/hashgraph-react-wallets";
 import { HashConnectButton } from "@/components/HashConnectButton";
@@ -32,6 +32,7 @@ import { TransferTransaction } from "@hashgraph/sdk";
 import { useToast } from "@/hooks/use-toast";
 import GoBack from "@/components/GoBack";
 import { Signer } from "node_modules/@hashgraph/sdk/lib/Signer";
+import useAppStore from "@/states/app";
 
 const MAX_FILE_SIZE = 2000000;
 
@@ -64,7 +65,11 @@ const formSchema = z.object({
     message: "A start date is required.",
   }),
   cover_image: z.string().url({ message: "Image is required." }),
-  dev_wallet: z.string().optional(),
+  dev_wallet: z
+    .string()
+    .regex(/^(0|(?:[1-9]\d*))\.(0|(?:[1-9]\d*))\.(0|(?:[1-9]\d*))$/)
+    .optional()
+    .or(z.string().max(0)),
   twitter: z.string().url().or(z.string().max(0)),
   discord: z.string().url().or(z.string().max(0)),
   telegram: z.string().url().or(z.string().max(0)),
@@ -74,7 +79,8 @@ const formSchema = z.object({
 export function SubmitForm() {
   const createToken = useCreateToken();
   const { isConnected, signer } = useWallet(HashpackConnector);
-  const [isCreating, setIsCreating] = useState(false);
+  const isCreating = useAppStore((state) => state.isCreating);
+  const setIsCreating = useAppStore((state) => state.setIsCreating);
   const [dragActive, setDragActive] = React.useState(false);
   const [coverImage, setCoverImage] = React.useState<File | null>(null);
   const [hbarAmount, setHbarAmount] = React.useState<number | null>(null);
@@ -154,9 +160,9 @@ export function SubmitForm() {
         try {
           setIsUploading(true);
           setCoverImage(file);
-          const upload = await pinata.upload.file(file);
-          const ipfsUrl = await pinata.gateways.convert(upload.IpfsHash);
-          form.setValue("cover_image", ipfsUrl);
+          const upload = await uploadFile(file);
+          console.log(upload);
+          form.setValue("cover_image", upload);
           form.clearErrors("cover_image");
           setIsUploading(false);
         } catch (error) {
@@ -234,8 +240,6 @@ export function SubmitForm() {
           ...values,
           conensusTimestamp: txResponse.transactionId.toString(),
         });
-        // pass to zustand
-        setIsCreating(false);
       }
     } catch (error) {
       setIsCreating(false);

@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { format, startOfDay } from "date-fns";
 import { queryClient } from "@/App";
 import axios from "axios";
+import useAppStore from "@/states/app";
 
 export interface Token {
   conensusTimestamp: string;
@@ -25,6 +26,7 @@ export function useCreateToken() {
   const navigate = useNavigate();
   const { data: accountId } = useAccountId();
   const { toast } = useToast();
+  const setIsCreating = useAppStore((state) => state.setIsCreating);
 
   return useMutation(
     async (token: Token) => {
@@ -60,10 +62,14 @@ export function useCreateToken() {
     {
       retry: 10,
       onSuccess: (data: { id: string }) => {
-        queryClient.invalidateQueries(["tokens"]);
+        queryClient.invalidateQueries(["tokens", "today"]);
+        queryClient.invalidateQueries(["tokens", "upcoming"]);
+        queryClient.invalidateQueries(["tokens", "ongoing"]);
         navigate("/submit-token/success", { state: { id: data.id } });
+        setIsCreating(false);
       },
       onError: () => {
+        setIsCreating(false);
         toast({
           title: "Error",
           description:
@@ -73,4 +79,25 @@ export function useCreateToken() {
       },
     }
   );
+}
+
+export async function uploadFile(file: File): Promise<any> {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_BACKEND_URL}/upload`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to upload file, please try again.");
+  }
 }

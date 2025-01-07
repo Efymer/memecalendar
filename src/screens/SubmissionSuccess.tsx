@@ -24,7 +24,7 @@ export default function SubmissionSuccess() {
   return (
     <Layout>
       <GoBack />
-      <div className="min-h-screen bg-[#0A0D14] text-white font-mono container max-w-2xl">
+      <div className="bg-[#0A0D14] text-white font-mono container max-w-2xl">
         <div className="border border-[#1a2333] rounded-lg overflow-hidden mx-auto my-6">
           <div className="bg-[#1a2333] px-4 py-2 flex items-center justify-between">
             <div className="flex items-center gap-2">
