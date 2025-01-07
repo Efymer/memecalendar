@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { format, startOfDay } from "date-fns";
-import { getHbarAmountFromDollars, cn, pinata } from "@/lib/utils";
+import { getHbarAmountFromDollars, cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
 import Layout from "./Layout";
-import { uploadFile, useCreateToken } from "@/mutations/token";
+import { useCreateToken } from "@/mutations/token";
 import { HashpackConnector } from "@buidlerlabs/hashgraph-react-wallets/connectors";
 import { useWallet } from "@buidlerlabs/hashgraph-react-wallets";
 import { HashConnectButton } from "@/components/HashConnectButton";
@@ -64,7 +64,7 @@ const formSchema = z.object({
   date: z.date({
     message: "A start date is required.",
   }),
-  cover_image: z.string().url({ message: "Image is required." }),
+  cover_image: z.string({ message: "Image is required." }),
   dev_wallet: z
     .string()
     .regex(/^(0|(?:[1-9]\d*))\.(0|(?:[1-9]\d*))\.(0|(?:[1-9]\d*))$/)
@@ -84,7 +84,6 @@ export function SubmitForm() {
   const [dragActive, setDragActive] = React.useState(false);
   const [coverImage, setCoverImage] = React.useState<File | null>(null);
   const [hbarAmount, setHbarAmount] = React.useState<number | null>(null);
-  const [isUploading, setIsUploading] = React.useState(false);
   const { toast } = useToast();
 
   const form = useForm({
@@ -126,13 +125,9 @@ export function SubmitForm() {
       const file = e.dataTransfer.files[0];
       if (file.size <= MAX_FILE_SIZE) {
         try {
-          setIsUploading(true);
           setCoverImage(file);
-          const upload = await pinata.upload.file(file);
-          const ipfsUrl = await pinata.gateways.convert(upload.IpfsHash);
-          form.setValue("cover_image", ipfsUrl);
+          form.setValue("cover_image", file.name);
           form.clearErrors("cover_image");
-          setIsUploading(false);
         } catch (error) {
           toast({
             title: "Error uploading image",
@@ -158,13 +153,9 @@ export function SubmitForm() {
       const file = e.target.files[0];
       if (file.size <= MAX_FILE_SIZE) {
         try {
-          setIsUploading(true);
           setCoverImage(file);
-          const upload = await uploadFile(file);
-          console.log(upload);
-          form.setValue("cover_image", upload);
+          form.setValue("cover_image", file.name);
           form.clearErrors("cover_image");
-          setIsUploading(false);
         } catch (error) {
           toast({
             title: "Error uploading image",
@@ -239,6 +230,7 @@ export function SubmitForm() {
         createToken.mutate({
           ...values,
           conensusTimestamp: txResponse.transactionId.toString(),
+          file: coverImage,
         });
       }
     } catch (error) {
@@ -381,35 +373,26 @@ export function SubmitForm() {
                                 onChange={handleChange}
                               />
                               <div className="flex flex-col items-center gap-2">
-                                {isUploading ? (
-                                  <div className="flex flex-row items-center gap-2">
-                                    <Loader className="h-8 w-8 text-muted-foreground animate-spin" />
-                                    <div className="text-sm text-muted-foreground">
-                                      Uploading...
-                                    </div>
-                                  </div>
-                                ) : (
-                                  <>
-                                    {coverImage ? (
-                                      <img
-                                        src={URL.createObjectURL(coverImage)}
-                                      />
-                                    ) : (
-                                      // <div className="text-sm text-muted-foreground">
-                                      //   {coverImage.name}
-                                      // </div>
-                                      <>
-                                        <Upload className="h-8 w-8 text-muted-foreground" />
-                                        <div className="text-base">
-                                          Drag & Drop your files or Browse
-                                        </div>
-                                        <div className="text-sm text-muted-foreground">
-                                          PNG, JPG, GIF up to 1MB
-                                        </div>
-                                      </>
-                                    )}
-                                  </>
-                                )}
+                                <>
+                                  {coverImage ? (
+                                    <img
+                                      src={URL.createObjectURL(coverImage)}
+                                    />
+                                  ) : (
+                                    // <div className="text-sm text-muted-foreground">
+                                    //   {coverImage.name}
+                                    // </div>
+                                    <>
+                                      <Upload className="h-8 w-8 text-muted-foreground" />
+                                      <div className="text-base">
+                                        Drag & Drop your files or Browse
+                                      </div>
+                                      <div className="text-sm text-muted-foreground">
+                                        PNG, JPG, GIF up to 1MB
+                                      </div>
+                                    </>
+                                  )}
+                                </>
                               </div>
                             </div>
                           </FormControl>

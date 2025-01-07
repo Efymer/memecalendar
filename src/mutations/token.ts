@@ -9,6 +9,7 @@ import useAppStore from "@/states/app";
 
 export interface Token {
   conensusTimestamp: string;
+  file: File;
   id: string;
   name: string;
   symbol: string;
@@ -30,9 +31,11 @@ export function useCreateToken() {
 
   return useMutation(
     async (token: Token) => {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/verify-transaction`,
-        {
+      const formData = new FormData();
+      formData.append("file", token.file);
+      formData.append(
+        "data",
+        JSON.stringify({
           consensusTimestamp: token.conensusTimestamp,
           content: {
             name: token.name,
@@ -50,6 +53,16 @@ export function useCreateToken() {
             website: token.website,
             created_by: accountId,
           },
+        })
+      );
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/verify-transaction`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 
@@ -61,6 +74,7 @@ export function useCreateToken() {
     },
     {
       retry: 10,
+      retryDelay: 1000,
       onSuccess: (data: { id: string }) => {
         queryClient.invalidateQueries(["tokens", "today"]);
         queryClient.invalidateQueries(["tokens", "upcoming"]);
