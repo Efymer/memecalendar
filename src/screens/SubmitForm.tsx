@@ -1,5 +1,5 @@
 import React from "react";
-import { CalendarIcon, Loader, Upload } from "lucide-react";
+import { AlertCircle, CalendarIcon, DollarSign, Loader, Upload } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -83,7 +83,6 @@ export function SubmitForm() {
   const setIsCreating = useAppStore((state) => state.setIsCreating);
   const [dragActive, setDragActive] = React.useState(false);
   const [coverImage, setCoverImage] = React.useState<File | null>(null);
-  const [hbarAmount, setHbarAmount] = React.useState<number | null>(null);
   const { toast } = useToast();
 
   const form = useForm({
@@ -178,17 +177,9 @@ export function SubmitForm() {
     return b.hbarAmount;
   };
 
-  React.useEffect(() => {
-    getHbarAmount().then((amount) => setHbarAmount(amount));
-
-    const intervalId = setInterval(() => {
-      getHbarAmount().then((amount) => setHbarAmount(amount));
-    }, 120000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
   const handlePayment = async (values) => {
+    const hbarAmount = await getHbarAmount();
+
     if (!signer) {
       toast({
         title: "Wallet not connected",
@@ -540,13 +531,17 @@ export function SubmitForm() {
                       </div>
                     </div>
 
-                    <p>
-                      The listing has a fee of{" "}
-                      {hbarAmount !== null
-                        ? Number(hbarAmount).toFixed(2)
-                        : "..."}
-                      ℏ ($1)
-                    </p>
+                    <div className="flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-500 p-3 rounded-lg text-sm font-mono">
+                      <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                      <div className="flex items-center gap-1">
+                        <span>Listing fee:</span>
+                        <div className="flex items-center">
+                          <DollarSign className="h-4 w-4" />
+                          <span>1.00</span>
+                        </div>
+                        <span>paid in ℏbar</span>
+                      </div>
+                    </div>
                     {isConnected ? (
                       <>
                         {isCreating ? (
