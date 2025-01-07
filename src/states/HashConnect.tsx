@@ -10,7 +10,7 @@ const metadata = {
 };
 
 export const ReactWalletsProvider = ({ children }) => {
-  const isTestnet = import.meta.env.VITE_NETWORK === "testnet";
+  const isTestnet = import.meta.env.VITE_HEDERA_NETWORK === "testnet";
 
   return (
     <HWBridgeProvider
