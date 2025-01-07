@@ -1,6 +1,7 @@
 import { useWallet } from "@buidlerlabs/hashgraph-react-wallets";
 import { HashpackConnector } from "@buidlerlabs/hashgraph-react-wallets/connectors";
 import { Button } from "./ui/button";
+import { Wallet } from "lucide-react";
 
 export const HashConnectButton = () => {
   const { isConnected, connect, disconnect } = useWallet(HashpackConnector);
@@ -28,7 +29,8 @@ export const HashConnectButton = () => {
       className="bg-blue-500 hover:bg-blue-600 text-white font-mono w-full"
       onClick={handleConnect}
     >
-      Connect
+      <Wallet className="h-4 w-4" />
+      Connect Wallet
     </Button>
   );
 };
