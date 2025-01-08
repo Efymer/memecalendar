@@ -135,6 +135,7 @@ export function useGetTokenById(tokenId: string) {
       return data?.token_launch_by_pk;
     },
     {
+      retry: false,
       enabled: !!tokenId,
     }
   );

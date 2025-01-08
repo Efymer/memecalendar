@@ -1,12 +1,4 @@
-import {
-  Twitter,
-  MessageCircle,
-  Globe,
-  Share2,
-  Calendar,
-  Send,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Twitter, MessageCircle, Globe, Calendar, Send } from "lucide-react";
 import Layout from "./Layout";
 import { Link, useParams } from "react-router-dom";
 import AddToCalendar from "@/components/AddToCalendar";
@@ -14,10 +6,15 @@ import { useGetTokenById } from "@/queries/token";
 import { format } from "date-fns";
 import Banner from "@/components/Banner";
 import GoBack from "@/components/GoBack";
+import NotFound from "./NotFound";
 
 export default function TokenPage() {
   const { id } = useParams<{ id: string }>();
-  const { data } = useGetTokenById(id);
+  const { data, isLoading } = useGetTokenById(id);
+
+  if (!isLoading && !data) {
+    return <NotFound />;
+  }
 
   return (
     <Layout>

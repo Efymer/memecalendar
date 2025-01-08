@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { Terminal } from "lucide-react";
-import { SiteHeader } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import Layout from "./Layout";
 
 export default function NotFound() {
