@@ -162,19 +162,3 @@ export default function Home() {
     </Layout>
   );
 }
-
-{
-  /* <div className="flex gap-6">
-  <div className="flex-1 space-y-6 max-w-5xl">
-    <h1 className="text-2xl font-bold">Memejob Upcoming Launches 🚀</h1>
-    <div className="grid gap-6">
-      {data.map((data, i) => (
-        <TokenDropCard key={i} {...data} />
-      ))}
-    </div>
-  </div>
-  {/* <div className="w-[300px]">
-    <Sidebar />
-  </div>
-</div> */
-}
