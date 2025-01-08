@@ -210,12 +210,7 @@ export function SubmitForm() {
       const transferTxReceipt = await txResponse.getReceiptWithSigner(
         signer as Signer
       );
-      // const transferTxRecord = await txResponse.getRecordWithSigner(signer as Signer);
       const transactionStatus = transferTxReceipt.status;
-
-      console.log(txResponse.transactionId.toString());
-      // console.log("Transaction response:", transferTxRecord);
-      console.log("Transaction status:", transferTxReceipt);
 
       if (transactionStatus.toString() === "SUCCESS") {
         createToken.mutate({
