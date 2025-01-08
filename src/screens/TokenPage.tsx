@@ -34,7 +34,7 @@ export default function TokenPage() {
             </div>
           </div>
 
-          {true ? (
+          {isLoading ? (
             <TokenDetailsLoading />
           ) : (
             <div className="p-6 space-y-6">
