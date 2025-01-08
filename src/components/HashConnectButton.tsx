@@ -2,14 +2,13 @@ import { useWallet } from "@buidlerlabs/hashgraph-react-wallets";
 import { HashpackConnector } from "@buidlerlabs/hashgraph-react-wallets/connectors";
 import { Button } from "./ui/button";
 import { Wallet } from "lucide-react";
+import { WalletModal } from "./WalletModal";
+import { useState } from "react";
 
 export const HashConnectButton = () => {
-  const { isConnected, connect, disconnect } = useWallet(HashpackConnector);
+  const { isConnected, disconnect } = useWallet(HashpackConnector);
+  const [showWalletModal, setShowWalletModal] = useState(false);
 
-  const handleConnect = async (e) => {
-    e.preventDefault();
-    await connect();
-  };
 
   if (isConnected) {
     return (
@@ -24,13 +23,17 @@ export const HashConnectButton = () => {
   }
 
   return (
-    <Button
-      size="sm"
-      className="bg-blue-500 hover:bg-blue-600 text-white font-mono w-full"
-      onClick={handleConnect}
-    >
-      <Wallet className="h-4 w-4" />
-      Connect Wallet
-    </Button>
+    <>
+      <Button
+        size="sm"
+        className="bg-blue-500 hover:bg-blue-600 text-white font-mono w-full"
+        onClick={() => setShowWalletModal(true)}
+      >
+        <Wallet className="h-4 w-4" />
+        Connect Wallet
+      </Button>
+
+      <WalletModal open={showWalletModal} onOpenChange={setShowWalletModal} />
+    </>
   );
 };
