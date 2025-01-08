@@ -200,9 +200,11 @@ export function SubmitForm() {
 
     try {
       setIsCreating(true);
+      const memeCalendarAccount = import.meta.env.VITE_HEDERA_ACCOUNT;
+
       const transaction = await new TransferTransaction()
         .addHbarTransfer(signer.getAccountId(), -hbarAmount)
-        .addHbarTransfer("0.0.5345237", hbarAmount)
+        .addHbarTransfer(memeCalendarAccount, hbarAmount)
         .freezeWithSigner(signer as Signer);
 
       const signedTx = await transaction.signWithSigner(signer as Signer);

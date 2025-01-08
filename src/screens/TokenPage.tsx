@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import Banner from "@/components/Banner";
 import GoBack from "@/components/GoBack";
 import NotFound from "./NotFound";
+import { TokenDetailsLoading } from "@/components/TokenDetailsLoading";
 
 export default function TokenPage() {
   const { id } = useParams<{ id: string }>();
@@ -33,103 +34,107 @@ export default function TokenPage() {
             </div>
           </div>
 
-          <div className="p-6 space-y-6">
-            <div className="grid md:grid-cols-[300px_1fr] gap-6">
-              <div className="space-y-4">
-                <div className="relative aspect-square w-full overflow-hidden rounded-lg border border-[#1a2333]">
-                  <img
-                    src={data?.cover_image}
-                    alt={data?.name}
-                    className="object-cover"
-                    style={{
-                      objectFit: "cover",
-                      width: "100%",
-                      height: "100%",
-                      display: "block",
-                    }}
-                  />
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <AddToCalendar
-                    event={{
-                      name: data?.name,
-                      description: data?.description,
-                      date: data?.date,
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-6">
+          {true ? (
+            <TokenDetailsLoading />
+          ) : (
+            <div className="p-6 space-y-6">
+              <div className="grid md:grid-cols-[300px_1fr] gap-6">
                 <div className="space-y-4">
-                  <div className="flex items-center gap-2">
-                    <h1 className="text-2xl font-bold">
-                      {data?.name} ({data?.symbol})
-                    </h1>
+                  <div className="relative aspect-square w-full overflow-hidden rounded-lg border border-[#1a2333]">
+                    <img
+                      src={data?.cover_image}
+                      alt={data?.name}
+                      className="object-cover"
+                      style={{
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "100%",
+                        display: "block",
+                      }}
+                    />
                   </div>
 
-                  <div className="flex flex-wrap gap-4 text-sm text-white/70">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      <span>{data?.date && format(data?.date, "PPP")}</span>
+                  <div className="flex flex-col gap-2">
+                    <AddToCalendar
+                      event={{
+                        name: data?.name,
+                        description: data?.description,
+                        date: data?.date,
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2">
+                      <h1 className="text-2xl font-bold">
+                        {data?.name} ({data?.symbol})
+                      </h1>
+                    </div>
+
+                    <div className="flex flex-wrap gap-4 text-sm text-white/70">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="h-4 w-4" />
+                        <span>{data?.date && format(data?.date, "PPP")}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-3 text-sm">
+                      {data?.twitter && (
+                        <Link
+                          to={data?.twitter}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-white/70 hover:text-white transition-colors"
+                        >
+                          <Twitter className="h-4 w-4" />
+                          <span>Twitter</span>
+                        </Link>
+                      )}
+                      {data?.discord && (
+                        <Link
+                          to={data?.discord}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-white/70 hover:text-white transition-colors"
+                        >
+                          <MessageCircle className="h-4 w-4" />
+                          <span>Discord</span>
+                        </Link>
+                      )}
+                      {data?.telegram && (
+                        <Link
+                          to={data?.telegram}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-white/70 hover:text-white transition-colors"
+                        >
+                          <Send className="h-4 w-4" />
+                          <span>Website</span>
+                        </Link>
+                      )}
+                      {data?.website && (
+                        <Link
+                          to={data?.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-white/70 hover:text-white transition-colors"
+                        >
+                          <Globe className="h-4 w-4" />
+                          <span>Website</span>
+                        </Link>
+                      )}
                     </div>
                   </div>
 
-                  <div className="flex gap-3 text-sm">
-                    {data?.twitter && (
-                      <Link
-                        to={data?.twitter}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-white/70 hover:text-white transition-colors"
-                      >
-                        <Twitter className="h-4 w-4" />
-                        <span>Twitter</span>
-                      </Link>
-                    )}
-                    {data?.discord && (
-                      <Link
-                        to={data?.discord}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-white/70 hover:text-white transition-colors"
-                      >
-                        <MessageCircle className="h-4 w-4" />
-                        <span>Discord</span>
-                      </Link>
-                    )}
-                    {data?.telegram && (
-                      <Link
-                        to={data?.telegram}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-white/70 hover:text-white transition-colors"
-                      >
-                        <Send className="h-4 w-4" />
-                        <span>Website</span>
-                      </Link>
-                    )}
-                    {data?.website && (
-                      <Link
-                        to={data?.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-white/70 hover:text-white transition-colors"
-                      >
-                        <Globe className="h-4 w-4" />
-                        <span>Website</span>
-                      </Link>
-                    )}
+                  <div className="whitespace-pre-wrap text-white/70">
+                    {data?.description}
                   </div>
-                </div>
-
-                <div className="whitespace-pre-wrap text-white/70">
-                  {data?.description}
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </Layout>
