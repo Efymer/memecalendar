@@ -9,7 +9,6 @@ export const HashConnectButton = () => {
   const { isConnected, disconnect } = useWallet(HashpackConnector);
   const [showWalletModal, setShowWalletModal] = useState(false);
 
-
   if (isConnected) {
     return (
       <Button

@@ -10,17 +10,18 @@ interface WalletModalProps {
 
 export function WalletModal({ open, onOpenChange }: WalletModalProps) {
   const { connect: connectHashpack } = useWallet(HashpackConnector);
-  // const { connect: connectKabila } = useWallet(KabilaConnector);
+  const { connect: connectKabila } = useWallet(KabilaConnector);
 
   const handleConnectHashpack = async (e) => {
+    e.stopPropagation();
     e.preventDefault();
     await connectHashpack();
   };
 
-  // const handleConnectKabila = async (e) => {
-  //   e.preventDefault();
-  //   await connectKabila();
-  // };
+  const handleConnectKabila = async (e) => {
+    e.preventDefault();
+    await connectKabila();
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -44,7 +45,7 @@ export function WalletModal({ open, onOpenChange }: WalletModalProps) {
         <div className="grid gap-4">
           <Button
             variant="outline"
-            className="h-auto p-4 border-[#2a3343] text-white/70 hover:text-white hover:border-[#3a4353] font-mono bg-[#0A0D14]/50 hover:bg-[#1a2333]"
+            className="h-auto p-4 border-[#2a3343] text-white/70 hover:text-white hover:border-[#3a4353] font-mono bg-[#0A0D14]/50 hover:bg-[#1a2333] justify-start"
             onClick={(e) => {
               handleConnectHashpack(e);
               onOpenChange(false);
@@ -67,9 +68,9 @@ export function WalletModal({ open, onOpenChange }: WalletModalProps) {
             </div>
           </Button>
 
-          {/* <Button
+          <Button
             variant="outline"
-            className="h-auto p-4 border-[#2a3343] text-white/70 hover:text-white hover:border-[#3a4353] font-mono bg-[#0A0D14]/50 hover:bg-[#1a2333]"
+            className="h-auto p-4 border-[#2a3343] text-white/70 hover:text-white hover:border-[#3a4353] font-mono bg-[#0A0D14]/50 hover:bg-[#1a2333] justify-start"
             onClick={(e) => {
               handleConnectKabila(e);
               onOpenChange(false);
@@ -90,7 +91,7 @@ export function WalletModal({ open, onOpenChange }: WalletModalProps) {
                 </div>
               </div>
             </div>
-          </Button> */}
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

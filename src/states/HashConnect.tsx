@@ -1,6 +1,12 @@
 import { HWBridgeProvider } from "@buidlerlabs/hashgraph-react-wallets";
-import { HashpackConnector } from "@buidlerlabs/hashgraph-react-wallets/connectors";
-import { HederaMainnet, HederaTestnet } from "@buidlerlabs/hashgraph-react-wallets/chains";
+import {
+  HashpackConnector,
+  KabilaConnector,
+} from "@buidlerlabs/hashgraph-react-wallets/connectors";
+import {
+  HederaMainnet,
+  HederaTestnet,
+} from "@buidlerlabs/hashgraph-react-wallets/chains";
 
 const metadata = {
   name: "MemeCalendar.fun",
@@ -16,7 +22,7 @@ export const ReactWalletsProvider = ({ children }) => {
     <HWBridgeProvider
       metadata={metadata}
       projectId={"655429453a17835dec55d8f12364aa81"}
-      connectors={[HashpackConnector]}
+      connectors={[HashpackConnector, KabilaConnector]}
       chains={[isTestnet ? HederaTestnet : HederaMainnet]}
     >
       {children}
