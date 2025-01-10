@@ -42,6 +42,10 @@ export async function getHbarAmountFromDollars(usdAmount = 1) {
   }
 }
 
+export function sumLiquidityUsd(data: any[]) {
+  return data.reduce((sum, item) => sum + parseFloat(item.liquidityUsd), 0);
+}
+
 export function sumVolumeUsd(data: any[]) {
   return data.reduce((sum, item) => sum + parseFloat(item.volumeUsd), 0);
 }
