@@ -49,7 +49,7 @@ export function LaunchedTokenCard({ token }) {
           </div>
 
           <div className="md:grid grid-cols-5 gap-6 ml-4">
-            <div className="col-span-2 space-y-1 flex items-center flex-col justify-center sm:justify-start">
+            <div className="col-span-2 space-y-1 flex sm:items-center flex-col justify-center items-start">
               <p className="text-2xl font-bold text-white">
                 {tokenInfo.symbol}
               </p>
