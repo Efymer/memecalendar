@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import request, { gql } from "graphql-request";
 import { Token } from "@/mutations/token";
 import { format, getUnixTime } from "date-fns";
-import { formatCompactNumber, sumVolumeUsd } from "@/lib/utils";
+import { formatCompactNumber, sumLiquidityUsd, sumVolumeUsd } from "@/lib/utils";
 
 interface Tokens {
   token_launch: Array<Token>;
@@ -200,6 +200,34 @@ export async function fetchVolume(tokenId: string) {
 
 export function useFetchVolume(tokenId: string) {
   return useQuery(["volume", tokenId], () => fetchVolume(tokenId), {
+    retry: false,
+    enabled: !!tokenId,
+    refetchInterval: 1000 * 60 * 1, // 1 minute
+  });
+}
+
+export async function fetchLiquidity(tokenId: string) {
+  var d = new Date();
+  d.setDate(d.getDate() - 1);
+  const yesterday = getUnixTime(d);
+  const now = getUnixTime(new Date());
+
+  const response = await fetch(
+    `${
+      import.meta.env.VITE_SAUCERSWAP_API
+    }/tokens/prices/${tokenId}?interval=FIVEMIN&from=${yesterday}&to=${now}`
+  );
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  const data = await response.json();
+
+  return formatCompactNumber(sumLiquidityUsd(data));
+}
+
+
+export function useFetchLiquidity(tokenId: string) {
+  return useQuery(["liquidity", tokenId], () => fetchVolume(tokenId), {
     retry: false,
     enabled: !!tokenId,
     refetchInterval: 1000 * 60 * 1, // 1 minute

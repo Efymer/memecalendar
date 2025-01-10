@@ -13,10 +13,18 @@ export function LaunchedTokenCard({ token }) {
     token.id
   );
   const { data: volume, isLoading: isLoadingVolume } = useFetchVolume(token.id);
+  const { data: liquidity, isLoading: isLoadingLiquidity } = useFetchVolume(
+    token.id
+  );
+
   const { data: prices, isLoading: isLoadingPrices } = useFetchPrices();
   const totalSupply = 1000_000_000; // 980 million
 
-  const isLoading = isLoadingTokenInfo || isLoadingVolume || isLoadingPrices;
+  const isLoading =
+    isLoadingTokenInfo ||
+    isLoadingVolume ||
+    isLoadingPrices ||
+    isLoadingLiquidity;
 
   if (isLoading) return null;
 
@@ -48,14 +56,14 @@ export function LaunchedTokenCard({ token }) {
             />
           </div>
 
-          <div className="md:grid grid-cols-5 gap-6 ml-4">
-            <div className="col-span-2 space-y-1 flex sm:items-center flex-col justify-center items-start">
+          <div className="md:grid grid-cols-10 gap-6 ml-4 flex-grow">
+            <div className="col-span-2 space-y-1 flex flex-col items-start">
               <p className="text-2xl font-bold text-white">
                 {tokenInfo.symbol}
               </p>
               <p className="text-sm text-white/50">{token.id}</p>
             </div>
-            <div className="space-y-1">
+            <div className="col-span-2 space-y-1 self-center">
               <p className="text-sm text-white/50">Price</p>
               <p className="text-base text-white inline-flex items-center">
                 ${tokenInfo.priceUsd.toFixed(6)}
@@ -70,15 +78,19 @@ export function LaunchedTokenCard({ token }) {
                 {prices[token.id].toFixed(2)}%
               </p>
             </div>
-            <div className="space-y-1">
-              <p className="text-sm text-white/50">24h Vol.</p>
-              <p className="text-base text-white">{volume}</p>
-            </div>
-            <div className="space-y-1">
+            <div className="col-span-2  space-y-1 self-center">
               <p className="text-sm text-white/50">Market Cap</p>
               <p className="text-base text-white">
-                {formatCompactNumber(marketCap)}
+                ${formatCompactNumber(marketCap)}
               </p>
+            </div>
+            <div className="col-span-2 space-y-1 self-center">
+              <p className="text-sm text-white/50">24h Vol.</p>
+              <p className="text-base text-white">${volume}</p>
+            </div>
+            <div className="col-span-2 space-y-1 self-center">
+              <p className="text-sm text-white/50">Liquidity</p>
+              <p className="text-base text-white">${liquidity}</p>
             </div>
           </div>
 
