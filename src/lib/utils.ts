@@ -1,10 +1,9 @@
 /// <reference types="vite/client" />
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
-import { PinataSDK } from "pinata-web3"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export function formatDate(dateString: string) {
@@ -43,8 +42,21 @@ export async function getHbarAmountFromDollars(usdAmount = 1) {
   }
 }
 
+export function sumVolumeUsd(data: any[]) {
+  return data.reduce((sum, item) => sum + parseFloat(item.volumeUsd), 0);
+}
 
-export const pinata = new PinataSDK({
-  pinataJwt: `${import.meta.env.VITE_PINATA_JWT}`,
-  pinataGateway: `${import.meta.env.VITE_GATEWAY_URL}`
-})
+export function formatCompactNumber(number: number): string {
+  const suffixes = ["", "K", "M", "B", "T"];
+  const magnitude = Math.floor(Math.log10(Math.abs(number)) / 3);
+  const scaledNumber = number / Math.pow(1000, magnitude);
+  const suffix = suffixes[magnitude];
+
+  // Handle decimals based on size
+  if (scaledNumber >= 100) {
+    return `${scaledNumber.toFixed(0)}${suffix}`;
+  } else if (scaledNumber >= 10) {
+    return `${scaledNumber.toFixed(1)}${suffix}`;
+  }
+  return `${scaledNumber.toFixed(2)}${suffix}`;
+}

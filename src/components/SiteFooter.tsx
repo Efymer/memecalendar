@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function SiteFooter() {
   return (
     <footer className="border-t border-[#1a2333] bg-[#0A0D14] py-6 mt-auto">
@@ -6,17 +8,26 @@ export function SiteFooter() {
           href="https://x.com/memecalendarfun"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors"
+          className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors"
         >
-          <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          <svg
+            viewBox="0 0 24 24"
+            className="h-4 w-4 fill-current"
+            aria-hidden="true"
+          >
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
           </svg>
-          <span>Follow us</span>
         </a>
         <div className="space-y-2">
-          <p>© {new Date().getFullYear()} Token Calendar. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} Token Calendar. All rights reserved.
+          </p>
           <p>This website is not affiliated with or endorsed by memejob.fun</p>
         </div>
+        {/* <div className="space-y-2">
+          <Link to="/terms-of-service">Terms and Conditions</Link> |{" "}
+          <Link to="/privacy-policy">Privacy Policy</Link>
+        </div> */}
       </div>
     </footer>
   );

@@ -173,7 +173,7 @@ export function TokenCard({
           )}
           {telegram && (
             <Link
-              to={website}
+              to={telegram}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-sm text-white/70 hover:text-white transition-colors font-mono"
