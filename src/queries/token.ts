@@ -227,7 +227,7 @@ export async function fetchLiquidity(tokenId: string) {
 
 
 export function useFetchLiquidity(tokenId: string) {
-  return useQuery(["liquidity", tokenId], () => fetchVolume(tokenId), {
+  return useQuery(["liquidity", tokenId], () => fetchLiquidity(tokenId), {
     retry: false,
     enabled: !!tokenId,
     refetchInterval: 1000 * 60 * 1, // 1 minute

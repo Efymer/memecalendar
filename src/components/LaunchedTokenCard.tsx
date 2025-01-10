@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Twitter, Globe } from "lucide-react";
 import { cn, formatCompactNumber } from "@/lib/utils";
 import {
+  useFetchLiquidity,
   useFetchPrices,
   useFetchVolume,
   useGetTokenInfo,
@@ -13,7 +14,7 @@ export function LaunchedTokenCard({ token }) {
     token.id
   );
   const { data: volume, isLoading: isLoadingVolume } = useFetchVolume(token.id);
-  const { data: liquidity, isLoading: isLoadingLiquidity } = useFetchVolume(
+  const { data: liquidity, isLoading: isLoadingLiquidity } = useFetchLiquidity(
     token.id
   );
 
