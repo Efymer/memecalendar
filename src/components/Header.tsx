@@ -37,14 +37,14 @@ export function SiteHeader() {
           </Link>
         </div>
         <div className="flex items-center gap-4">
-          <Button
+            <Button
             variant="outline"
             size="sm"
-            className="border-orange-500 text-white bg-orange-600 hover:bg-orange-700 hover:text-white font-mono"
+            className="hidden sm:block border-orange-500 text-white bg-orange-600 hover:bg-orange-700 hover:text-white font-mono"
             onClick={handleNavigate}
-          >
+            >
             Submit Your Token
-          </Button>
+            </Button>
           {isConnected && <HashConnectButton />}
         </div>
       </div>
