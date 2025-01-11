@@ -39,6 +39,16 @@ const tokens = [
     cover_image:
       "https://maroon-junior-aphid-734.mypinata.cloud/ipfs/QmRUrLajRxBtWm8eff9g49m7toLsYsz5PbjYsE2phazWu7",
   },
+  {
+    id: "0.0.7894172",
+    cover_image:
+      "https://maroon-junior-aphid-734.mypinata.cloud/ipfs/QmaD6cYZLETbKpzCJFzJu3LeEQCz6ah9Y9dYH2C23AurTP",
+  },
+  {
+    id: "0.0.7893551",
+    cover_image:
+      "https://maroon-junior-aphid-734.mypinata.cloud/ipfs/QmbaG7T8KiXEmxQy4BoX25TdcpbDHn1snBN8ZwCFUaYE7k",
+  }
 ];
 
 export function LaunchedTokenList() {
