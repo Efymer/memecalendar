@@ -12,7 +12,7 @@ export function SiteHeader() {
 
   return (
     <header className="w-full border-b border-[#1a2333] bg-[#0A0D14]">
-      <div className="container flex h-14 items-center justify-between">
+      <div className="container flex h-14 items-center justify-between gap-4">
         <Link
           to="/"
           className="text-2xl font-mono tracking-tight text-white hover:text-white/90 transition-colors mr-6"
