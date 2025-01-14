@@ -24,7 +24,7 @@ export function HeroSection() {
                 <span className="gradient-text">Meme Token</span>
               </h1>
               <p className="text-lg text-white/70 max-w-xl">
-                Your ultimate platform for tracking, analyzing, and discovering
+                Your ultimate platform for tracking and discovering
                 new MemeJob.fun token launches.
               </p>
             </div>
