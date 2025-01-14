@@ -8,7 +8,7 @@ import { TestnetBanner } from "@/components/TestnetBanner";
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#0A0D14] text-white font-mono flex flex-col">
-      <TestnetBanner />
+      {import.meta.env.VITE_HEDERA_NETWORK === "testnet" && <TestnetBanner />}
       <SiteHeader />
       <main className="flex-1">
         <HeroSection />
