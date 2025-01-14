@@ -1,6 +1,6 @@
 export function TokenDetailsLoading() {
   return (
-    <div className="bg-[#0A0D14]/50  overflow-hidden">
+    <div className="bg-[#0A0D14]/50 overflow-hidden">
       <div className="p-6 space-y-6">
         <div className="grid md:grid-cols-[300px_1fr] gap-6">
           {/* Image and Quick Info */}

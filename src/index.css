@@ -119,3 +119,38 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.gradient-text {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(to right, #3b82f6, #8b5cf6);
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: 0.5rem;
+  background: linear-gradient(to right, #1a2333, #2a3343);
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: 0.5rem;
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+.hero-gradient {
+  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1), transparent 50%);
+}
+
+.card-gradient {
+  background: linear-gradient(145deg, rgba(26, 35, 51, 0.5) 0%, rgba(10, 13, 20, 0.5) 100%);
+}
+

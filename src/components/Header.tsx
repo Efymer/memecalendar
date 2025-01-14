@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { HashConnectButton } from "./HashConnectButton";
 import { HashpackConnector } from "@buidlerlabs/hashgraph-react-wallets/connectors";
 import { useWallet } from "@buidlerlabs/hashgraph-react-wallets";
-import { Calendar, Gift, Trophy } from "lucide-react";
+import { Bot, Calendar, Gift, Trophy } from "lucide-react";
 
 export function SiteHeader() {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ export function SiteHeader() {
 
         <div className="flex items-start gap-8 justify-start flex-grow">
           <Link
-            to="/"
+            to="/tokens"
             className="flex items-center gap-2 text-sm font-mono text-white/80 hover:text-white transition-colors"
           >
             <Calendar className="h-4 w-4" />
@@ -34,6 +34,10 @@ export function SiteHeader() {
           >
             <Trophy className="h-4 w-4" />
             <span className="hidden sm:inline">Hall of Fame</span>
+          </Link>
+          <Link to="/bots" className="flex items-center gap-2 text-sm font-mono text-white/70 hover:text-white transition-colors">
+            <Bot className="h-4 w-4" />
+            <span className="hidden sm:inline">Bots</span>
           </Link>
         </div>
         <div className="flex items-center gap-4">

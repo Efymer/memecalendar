@@ -1,7 +1,4 @@
-import { Search } from "lucide-react";
 import { LaunchedTokenCard } from "./LaunchedTokenCard";
-import { Input } from "./ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
 const tokens = [
   {
@@ -48,7 +45,7 @@ const tokens = [
     id: "0.0.7893551",
     cover_image:
       "https://maroon-junior-aphid-734.mypinata.cloud/ipfs/QmbaG7T8KiXEmxQy4BoX25TdcpbDHn1snBN8ZwCFUaYE7k",
-  }
+  },
 ];
 
 export function LaunchedTokenList() {

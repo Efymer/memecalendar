@@ -20,7 +20,7 @@ export function SiteFooter() {
         </a>
         <div className="space-y-2">
           <p>
-            © {new Date().getFullYear()} Token Calendar. All rights reserved.
+            © {new Date().getFullYear()} memecalendar.fun - All rights reserved.
           </p>
           <p>This website is not affiliated with or endorsed by memejob.fun</p>
         </div>

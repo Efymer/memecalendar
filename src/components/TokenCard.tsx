@@ -63,7 +63,7 @@ export function TokenCard({
         <div className="flex gap-4">
           <div className="relative aspect-square w-24 overflow-hidden rounded-lg border border-[#1a2333]">
             <img
-              onClick={() => navigate(`/token/${id}`)}
+              onClick={() => navigate(`/tokens/${id}`)}
               src={cover_image}
               alt={name}
               className="object-cover cursor-pointer"
@@ -89,7 +89,7 @@ export function TokenCard({
           <div className="flex-1 space-y-2">
             <div className="flex items-center gap-1">
               <h1 className="text-lg font-semibold text-white font-mono">
-                <Link to={"/token/" + id}>
+                <Link to={"/tokens/" + id}>
                   {name} ({symbol})
                 </Link>
               </h1>
@@ -203,7 +203,7 @@ export function TokenCard({
               variant="outline"
               size="sm"
               className="border-[#2a3343] text-white/70 hover:text-white hover:border-[#3a4353] font-mono bg-[#0A0D14]/50 hover:bg-[#1a2333]"
-              onClick={() => navigate(`/token/${id}`)}
+              onClick={() => navigate(`/tokens/${id}`)}
             >
               Read More
             </Button>

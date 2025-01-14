@@ -8,6 +8,7 @@ import {
   useGetTokenInfo,
 } from "@/queries/token";
 import { Link } from "react-router-dom";
+import { LoadingHallOfFame } from "./LoadingHallOfFame";
 
 export function LaunchedTokenCard({ token }) {
   const { data: tokenInfo, isLoading: isLoadingTokenInfo } = useGetTokenInfo(
@@ -27,7 +28,7 @@ export function LaunchedTokenCard({ token }) {
     isLoadingPrices ||
     isLoadingLiquidity;
 
-  if (isLoading) return null;
+  if (isLoading) return <LoadingHallOfFame />;
 
   const marketCap = totalSupply * tokenInfo.priceUsd.toFixed(6);
 

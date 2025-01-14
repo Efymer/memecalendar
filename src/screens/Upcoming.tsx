@@ -12,7 +12,7 @@ import Banner from "@/components/Banner";
 import { EmptyState } from "@/components/EmptyState";
 import { LoadingState } from "@/components/LoadingState";
 
-export default function Home() {
+export default function Upcoming() {
   const { data: todayTokens, isLoading: isLoadingToday } = useGetTodayTokens();
   const { data: upComingTokens, isLoading: isLoadingUpcoming } =
     useGetUpcomingTokens();
