@@ -26,7 +26,7 @@ export function SiteHeader() {
             className="flex items-center gap-2 text-sm font-mono text-white/80 hover:text-white transition-colors"
           >
             <Calendar className="h-4 w-4" />
-            <span className="hidden sm:inline">Upcoming launches</span>
+            <span className="hidden sm:inline">Upcoming Tokens</span>
           </Link>
           <Link
             to="/hall-of-fame"

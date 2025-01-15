@@ -21,11 +21,11 @@ export function HeroSection() {
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 Discover the Next Big{" "}
-                <span className="gradient-text">Meme Token</span>
+                <span className="gradient-text">Token Launch</span>
               </h1>
               <p className="text-lg text-white/70 max-w-xl">
-                Your ultimate platform for tracking and discovering
-                new MemeJob.fun token launches.
+                Your ultimate platform for tracking and discovering new
+                MemeJob.fun token launches.
               </p>
             </div>
 
