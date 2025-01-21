@@ -147,7 +147,7 @@ export default function SubmissionSuccess() {
               <Button
                 variant="outline"
                 className="border-[#2a3343] text-white/70 hover:text-white hover:border-[#3a4353] font-mono bg-[#0A0D14]/50 hover:bg-[#1a2333]"
-                onClick={() => navigate("/token/" + id)}
+                onClick={() => navigate("/tokens/" + id)}
               >
                 View Submission
               </Button>
