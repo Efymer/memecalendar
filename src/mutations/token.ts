@@ -74,7 +74,7 @@ export function useCreateToken() {
     },
     {
       retry: 10,
-      retryDelay: 1000,
+      retryDelay: 3000,
       onSuccess: (data: { id: string }) => {
         queryClient.invalidateQueries(["tokens", "today"]);
         queryClient.invalidateQueries(["tokens", "upcoming"]);

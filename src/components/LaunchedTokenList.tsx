@@ -7,9 +7,19 @@ const tokens = [
       "https://maroon-junior-aphid-734.mypinata.cloud/ipfs/QmToicLd4wAqZNydZg9vWCxcPdTtVMotnmpZuVWxkos1KS",
   },
   {
+    id: "0.0.8105204", // IVY
+    cover_image:
+      "https://ipfs.memejob.fun/ipfs/Qmbn9jujzzBb44h8LU4HzLQadJT8xQvM35CpXQDGfGrZDj",
+  },
+  {
     id: "0.0.8041571", // SMACKM
     cover_image:
       "https://maroon-junior-aphid-734.mypinata.cloud/ipfs/QmVbmeXMunrpxgQs6z4bouw2sM1w6VYsyKurXTevMXuZd5",
+  },
+  {
+    id: "0.0.8090666", // HONK
+    cover_image:
+      "https://ipfs.memejob.fun/ipfs/QmbZfagjxqrLcLs7MkzeEGrAxiw2LiKFXNF2wjbshk5yr42",
   },
   {
     id: "0.0.7893707",
