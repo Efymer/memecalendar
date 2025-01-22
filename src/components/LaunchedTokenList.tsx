@@ -45,11 +45,11 @@ const tokens = [
     cover_image:
       "https://maroon-junior-aphid-734.mypinata.cloud/ipfs/Qmd91WcNjBLWQEgvCR7qDEQ9gTEVdsuostUKrnXvmDoSXe",
   },
-  // {
-  //   id: "0.0.7893347", // HERT
-  //   cover_image:
-  //     "https://maroon-junior-aphid-734.mypinata.cloud/ipfs/QmP7WVWVPeZhA5CW7vhV6EFLpKdawMD9xgF5MJtb1nTJFW",
-  // },
+  {
+    id: "0.0.7893347", // HERT
+    cover_image:
+      "https://maroon-junior-aphid-734.mypinata.cloud/ipfs/QmP7WVWVPeZhA5CW7vhV6EFLpKdawMD9xgF5MJtb1nTJFW",
+  },
   // {
   //   id: "0.0.7893583", // LARI
   //   cover_image:
